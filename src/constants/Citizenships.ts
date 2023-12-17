@@ -40,7 +40,6 @@ export const citizenships: {
         ],
       },
     ],
-    passportImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pasaporte_ES.svg/320px-Pasaporte_ES.svg.png",
+    passportImage: "./assets/Pasaporte_ES.svg.png",
   },
 ];
