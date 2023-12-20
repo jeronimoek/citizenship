@@ -8,7 +8,20 @@ export const citizenships: {
 }[] = [
   {
     title: "Ciudadanía italiana Jus Sanguinis",
-    requires: [Answers.ITALIAN_ANCESTRY_DATE_OK],
+    requires: [
+      {
+        mode: "OR",
+        values: [
+          Answers.ITALIAN_ANCESTRY_ONLY_MEN,
+          Answers.ITALIAN_ANCESTRY_CHILD_OK,
+        ],
+      },
+    ],
+    passportImage: "./assets/Italy.webp",
+  },
+  {
+    title: "Ciudadanía italiana Jus Sanguinis (vía judicial)",
+    requires: [Answers.ITALIAN_ANCESTRY_CHILD_NOT_OK],
     passportImage: "./assets/Italy.webp",
   },
   {

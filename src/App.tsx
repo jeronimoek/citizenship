@@ -6,11 +6,11 @@ import { Citizenship } from "./components/Citizenship";
 
 function App() {
   const [currentQuestionId, setCurrentQuestionId] = useState<number>(0);
-  const [currentAnswersCount, setCurrentAnswersCount] = useState<number>(0);
+  const [currentAnswers, setCurrentAnswers] = useState<number[]>([]);
   const [answers, setAnswers] = useState<Answers[]>([]);
 
   function resetQuestions() {
-    setCurrentAnswersCount(0);
+    setCurrentAnswers([]);
     setCurrentQuestionId(0);
     setAnswers([]);
   }
@@ -20,10 +20,16 @@ function App() {
   function toggleAnswer(id: number, multiple = false) {
     if (answers.includes(id)) {
       setAnswers((prev) => prev.filter((v) => v !== id));
-      setCurrentAnswersCount((prev) => prev - 1);
-    } else if (currentAnswersCount === 0 || multiple) {
+      setCurrentAnswers((prev) => prev.filter((v) => v !== id));
+    } else if (multiple) {
       setAnswers((prev) => [...prev, id]);
-      setCurrentAnswersCount((prev) => prev + 1);
+      setCurrentAnswers((prev) => [...prev, id]);
+    } else {
+      setAnswers((prev) => [
+        ...prev.filter((v) => v !== currentAnswers[0]),
+        id,
+      ]);
+      setCurrentAnswers([id]);
     }
   }
 
@@ -101,7 +107,7 @@ function App() {
           </div>
           <button
             onClick={() => {
-              setCurrentAnswersCount(0);
+              setCurrentAnswers([]);
               nextQuestion();
             }}
             className="primary"
